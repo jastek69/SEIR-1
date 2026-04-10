@@ -2,7 +2,7 @@
 
 Use Application Default Credentials (ADC):
 
-    gcloud auth application-default login
+    Terraform Authentication Command: gcloud auth application-default login
 
 1 Run 0-authentication.tf
 

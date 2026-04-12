@@ -91,3 +91,29 @@ module "mig" {
   db_user     = "han"
   db_password = "supersecret123"
 }
+
+#VPN 
+
+module "vpn_ha" {
+  source = "./modules/vpn_ha"
+
+  name        = "${local.prefix}-${var.environment}-corp"
+  region      = var.region
+  network     = module.vpc.network_id
+  router_name = "${local.prefix}-${var.environment}-vpn-router"
+
+  local_bgp_asn = 64514
+  peer_bgp_asn  = 65010
+
+  peer_interface_0_ip = "203.0.113.10"
+  peer_interface_1_ip = "203.0.113.11"
+
+  shared_secret_0 = "chewbacca-parsec-0"
+  shared_secret_1 = "chewbacca-parsec-1"
+
+  bgp_ip_range_0 = "169.254.10.1/30"
+  bgp_peer_ip_0  = "169.254.10.2"
+
+  bgp_ip_range_1 = "169.254.20.1/30"
+  bgp_peer_ip_1  = "169.254.20.2"
+}

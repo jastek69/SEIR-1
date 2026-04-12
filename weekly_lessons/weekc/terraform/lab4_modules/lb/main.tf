@@ -17,6 +17,7 @@ resource "google_compute_backend_service" "backend" {
   backend {
     group = var.instance_group
   }
+  # security_policy = google_compute_security_policy.waf.id 
 }
 
 #URL Map

@@ -16,3 +16,11 @@ module "gke" {
   network    = module.vpc.network_id
   subnetwork = module.vpc.subnet_id
 }
+
+module "lb" {
+  source = "./modules/lb"
+
+  name           = "${local.prefix}-${var.environment}-lb"
+  region         = var.region
+  instance_group = module.mig.instance_group
+}
